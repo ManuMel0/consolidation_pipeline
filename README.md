@@ -31,7 +31,7 @@ O desafio consistia em construir uma plataforma de dados capaz de:
 
 ## Arquitetura Geral
 
-![Arquitetura](docs/fmcg_architecture.png)
+![Arquitetura](docs/architecture.png)
 
 A solução foi desenvolvida seguindo os princípios da arquitetura Lakehouse da Databricks.
 
@@ -86,8 +86,8 @@ Os dados operacionais são armazenados inicialmente no AWS S3.
 ```text
 s3://landing-zone
 │
-├── raw/
-└── archive/
+├── landing/
+└── processed/
 ```
 
 ### Estratégia Utilizada
@@ -135,9 +135,9 @@ Responsável pela ingestão dos dados brutos.
 ### Metadados Adicionados
 
 ```python
-ingestion_timestamp
-source_file
-processing_date
+read_timestamp
+file_name
+file_size
 ```
 
 ---
@@ -282,7 +282,7 @@ A execução dos pipelines é realizada através de Databricks Workflows.
 
 ## Pipeline Incremental
 
-![Workflow](docs/workflow.png)
+![Workflow](docs/workflows.png)
 
 Fluxo de execução:
 
@@ -302,6 +302,7 @@ fact_processing_orders
 * Execução automatizada.
 * Recuperação de falhas.
 * Monitoramento centralizado.
+* Execuções pré agendadas.
 
 ---
 
@@ -325,8 +326,11 @@ consolidation_pipeline/
 │   └── incremental_load_fact
 │
 ├── docs/
-│   ├── fmcg_architecture.png
-│   └── workflow.png
+│   ├── architecture.png
+│   ├── workflow.png
+│   └── Dashboard_AtliQon Sales Insights.pdf
+│
+├── AtliQon Sales Insights.lvdash.json
 │
 └── README.md
 ```
@@ -341,7 +345,6 @@ O projeto utiliza Databricks Repos integrado diretamente ao GitHub.
 
 * Controle de versão.
 * Histórico de alterações.
-* Colaboração entre desenvolvedores.
 * Preparação para CI/CD.
 
 ---
@@ -404,13 +407,12 @@ Este projeto evidencia conhecimentos práticos em:
 
 ---
 
-# 👩‍💻 Autora
+# 👩‍💻 Sobre mim
 
-**Manuella Melo**
+Engenheira de Dados especializada em soluções de dados utilizando Databricks, PySpark, SQL e AWS. Possuo experiência em processamento de grandes volumes de dados, desenvolvimento de pipelines ETL e arquitetura Lakehouse, com foco em governança, automação e escalabilidade.
 
-Engenheira de Dados com foco em plataformas modernas de dados, arquitetura Lakehouse, governança e soluções analíticas escaláveis.
 
 ### Contato
 
-* LinkedIn: https://www.linkedin.com/in/SEU-LINK
-* GitHub: https://github.com/SEU-USUARIO
+* LinkedIn: https://www.linkedin.com/in/manuella-melo
+* GitHub: https://github.com/ManuMel0
