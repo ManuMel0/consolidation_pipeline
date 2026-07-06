@@ -7,33 +7,33 @@
 ![AWS S3](https://img.shields.io/badge/AWS-S3-orange)
 ![GitHub](https://img.shields.io/badge/GitHub-Version_Control-black)
 
-Projeto de Engenharia de Dados desenvolvido na plataforma Databricks para simular um cenário real de consolidação de dados após a aquisição de uma empresa do setor FMCG (Fast-Moving Consumer Goods).
+Data Engineering project developed on the Databricks platform to simulate a real-world data consolidation scenario after the acquisition of a company in the FMCG — Fast-Moving Consumer Goods — sector.
 
-A solução demonstra a implementação de uma arquitetura Lakehouse moderna utilizando Delta Live Tables (DLT), Unity Catalog, processamento incremental, governança de dados e orquestração automatizada.
-
----
-
-# 📖 Contexto do Negócio
-
-Uma grande empresa do setor FMCG adquiriu uma startup e precisava consolidar dados operacionais provenientes de diferentes sistemas, processos e estruturas organizacionais.
-
-O desafio consistia em construir uma plataforma de dados capaz de:
-
-* Integrar dados da empresa adquirida e da empresa matriz.
-* Garantir governança e rastreabilidade.
-* Automatizar cargas históricas e incrementais.
-* Disponibilizar dados confiáveis para análises corporativas.
-* Permitir consultas analíticas através de dashboards e linguagem natural.
+The solution demonstrates the implementation of a modern Lakehouse architecture using Delta Live Tables (DLT), Unity Catalog, incremental processing, data governance, and automated orchestration.
 
 ---
 
-# 🏗️ Arquitetura da Solução
+# 📖 Business Context
 
-## Arquitetura Geral
+A large FMCG company acquired a startup and needed to consolidate operational data from different systems, processes, and organizational structures.
 
-![Arquitetura](docs/architecture.png)
+The challenge was to build a data platform capable of:
 
-A solução foi desenvolvida seguindo os princípios da arquitetura Lakehouse da Databricks.
+* Integrating data from both the acquired company and the parent company.
+* Ensuring governance and traceability.
+* Automating historical and incremental data loads.
+* Providing reliable data for corporate analytics.
+* Enabling analytical queries through dashboards and natural language.
+
+---
+
+# 🏗️ Solution Architecture
+
+## General Architecture
+
+![Architecture](docs/architecture.png)
+
+The solution was developed following Databricks Lakehouse architecture principles.
 
 ```text
 AWS S3
@@ -48,10 +48,10 @@ Bronze Layer
 Silver Layer
    │
    ▼
-Gold Layer (Empresa Adquirida)
+Gold Layer (Acquired Company)
    │
    ▼
-Gold Corporativa (Empresa Matriz)
+Corporate Gold Layer (Parent Company)
    │
    ▼
 Dashboards + Genie AI
@@ -59,29 +59,29 @@ Dashboards + Genie AI
 
 ---
 
-# 🛠️ Stack Tecnológica
+# 🛠️ Technology Stack
 
-| Categoria             | Tecnologia                |
-| --------------------- | ------------------------- |
-| Plataforma            | Databricks Free Edition   |
-| Data Lake             | AWS S3                    |
-| Processamento         | PySpark                   |
-| Linguagem de Consulta | Spark SQL                 |
-| Arquitetura           | Medallion Architecture    |
-| Governança            | Unity Catalog             |
-| ETL                   | Delta Live Tables (DLT)   |
-| Orquestração          | Databricks Workflows      |
-| Versionamento         | GitHub + Databricks Repos |
-| Analytics             | Databricks Dashboards     |
-| IA Generativa         | Databricks Genie          |
+| Category        | Technology                |
+| --------------- | ------------------------- |
+| Platform        | Databricks Free Edition   |
+| Data Lake       | AWS S3                    |
+| Processing      | PySpark                   |
+| Query Language  | Spark SQL                 |
+| Architecture    | Medallion Architecture    |
+| Governance      | Unity Catalog             |
+| ETL             | Delta Live Tables (DLT)   |
+| Orchestration   | Databricks Workflows      |
+| Version Control | GitHub + Databricks Repos |
+| Analytics       | Databricks Dashboards     |
+| Generative AI   | Databricks Genie          |
 
 ---
 
-# 🏛️ Arquitetura Lakehouse
+# 🏛️ Lakehouse Architecture
 
 ## Landing Zone
 
-Os dados operacionais são armazenados inicialmente no AWS S3.
+Operational data is initially stored in AWS S3.
 
 ```text
 s3://landing-zone
@@ -90,19 +90,19 @@ s3://landing-zone
 └── processed/
 ```
 
-### Estratégia Utilizada
+### Strategy Used
 
-* Arquivos novos são identificados automaticamente.
-* Após processamento, os arquivos são movidos para a área de arquivamento.
-* Todo o processo mantém rastreabilidade completa dos dados.
+* New files are automatically identified.
+* After processing, files are moved to the archive area.
+* The entire process maintains full data traceability.
 
 ---
 
-# 📚 Governança com Unity Catalog
+# 📚 Governance with Unity Catalog
 
-Toda a plataforma é governada através do Unity Catalog.
+The entire platform is governed through Unity Catalog.
 
-## Estrutura do Catálogo
+## Catalog Structure
 
 ```text
 fmcg
@@ -112,27 +112,27 @@ fmcg
 └── gold
 ```
 
-### Recursos de Governança
+### Governance Features
 
-* Controle centralizado de acesso.
-* Data Lineage.
-* Catálogo corporativo.
-* Gerenciamento de metadados.
-* Compartilhamento seguro de dados.
+* Centralized access control.
+* Data lineage.
+* Corporate data catalog.
+* Metadata management.
+* Secure data sharing.
 
 ---
 
-# 🥉 Camada Bronze
+# 🥉 Bronze Layer
 
-Responsável pela ingestão dos dados brutos.
+Responsible for ingesting raw data.
 
-### Objetivos
+### Objectives
 
-* Preservar os dados originais.
-* Registrar informações de auditoria.
-* Garantir rastreabilidade.
+* Preserve the original data.
+* Register audit information.
+* Ensure traceability.
 
-### Metadados Adicionados
+### Added Metadata
 
 ```python
 read_timestamp
@@ -142,37 +142,37 @@ file_size
 
 ---
 
-# 🥈 Camada Silver
+# 🥈 Silver Layer
 
-Responsável pelo tratamento e padronização dos dados.
+Responsible for data cleaning, standardization, and transformation.
 
-### Processamento de Clientes
+### Customer Processing
 
-* Padronização de informações.
-* Tratamento de valores nulos.
-* Remoção de duplicidades.
+* Information standardization.
+* Null value handling.
+* Duplicate removal.
 
-### Processamento de Produtos
+### Product Processing
 
-* Normalização de atributos.
-* Conversão de tipos de dados.
-* Correção de inconsistências.
+* Attribute normalization.
+* Data type conversion.
+* Inconsistency correction.
 
-### Processamento de Preços
+### Price Processing
 
-* Validação de regras de negócio.
-* Padronização de formatos.
-* Controle de qualidade.
+* Business rule validation.
+* Format standardization.
+* Quality control.
 
 ---
 
-# 🥇 Camada Gold
+# 🥇 Gold Layer
 
-Disponibiliza dados prontos para consumo analítico.
+Provides analytics-ready data.
 
-## Modelo Dimensional
+## Dimensional Model
 
-### Dimensões
+### Dimensions
 
 ```text
 dim_customers
@@ -180,7 +180,7 @@ dim_products
 dim_gross_price
 ```
 
-### Fatos
+### Facts
 
 ```text
 fact_orders
@@ -188,11 +188,11 @@ fact_orders
 
 ---
 
-# 🏢 Estratégia de Consolidação Corporativa
+# 🏢 Corporate Consolidation Strategy
 
-Uma das principais decisões arquiteturais deste projeto foi a separação entre os domínios da empresa adquirida e da empresa matriz.
+One of the main architectural decisions in this project was the separation between the acquired company domain and the parent company domain.
 
-## Empresa Adquirida (Child Company)
+## Acquired Company — Child Company
 
 ```text
 Bronze
@@ -202,33 +202,33 @@ Silver
 Gold
 ```
 
-## Empresa Matriz (Parent Company)
+## Parent Company
 
 ```text
-Gold da Subsidiária
+Subsidiary Gold Data
            +
-Dados Corporativos
+Corporate Data
            ↓
-Gold Corporativa
+Corporate Gold Layer
 ```
 
-Essa abordagem permite autonomia dos domínios de dados e, ao mesmo tempo, viabiliza análises corporativas consolidadas.
+This approach allows autonomy across data domains while enabling consolidated corporate analytics.
 
 ---
 
 # ⚡ Delta Live Tables (DLT)
 
-O pipeline principal foi implementado utilizando Delta Live Tables.
+The main pipeline was implemented using Delta Live Tables.
 
-### Benefícios
+### Benefits
 
-* Desenvolvimento declarativo.
-* Dependências automáticas.
-* Monitoramento nativo.
-* Qualidade de dados integrada.
-* Menor esforço operacional.
+* Declarative development.
+* Automatic dependency management.
+* Native monitoring.
+* Integrated data quality.
+* Reduced operational effort.
 
-### Fluxo do Pipeline
+### Pipeline Flow
 
 ```text
 Bronze
@@ -240,51 +240,51 @@ Gold
 
 ---
 
-# 🔄 Estratégia de Carga
+# 🔄 Load Strategy
 
-A plataforma suporta dois tipos de processamento.
+The platform supports two types of processing.
 
-## Carga Histórica (Full Load)
+## Historical Load — Full Load
 
-Utilizada durante a inicialização da plataforma.
+Used during the initial platform setup.
 
 ```text
-Dados Brutos
+Raw Data
       ↓
-Carga Histórica
+Historical Load
       ↓
 Gold
 ```
 
-## Carga Incremental
+## Incremental Load
 
-Executada diariamente.
+Executed daily.
 
 ```text
-Novos Arquivos
+New Files
         ↓
-Processamento Incremental
+Incremental Processing
         ↓
-Atualização das Tabelas Gold
+Gold Table Updates
 ```
 
-### Benefícios
+### Benefits
 
-* Menor custo computacional.
-* Maior velocidade de processamento.
-* Atualizações frequentes dos dados.
+* Lower computational cost.
+* Faster processing.
+* Frequent data updates.
 
 ---
 
-# ⚙️ Orquestração
+# ⚙️ Orchestration
 
-A execução dos pipelines é realizada através de Databricks Workflows.
+Pipeline execution is handled through Databricks Workflows.
 
-## Pipeline Incremental
+## Incremental Pipeline
 
 ![Workflow](docs/workflows.png)
 
-Fluxo de execução:
+Execution flow:
 
 ```text
 dim_processing_customers
@@ -296,17 +296,17 @@ dim_processing_prices
 fact_processing_orders
 ```
 
-### Características
+### Characteristics
 
-* Dependências explícitas.
-* Execução automatizada.
-* Recuperação de falhas.
-* Monitoramento centralizado.
-* Execuções pré agendadas.
+* Explicit dependencies.
+* Automated execution.
+* Failure recovery.
+* Centralized monitoring.
+* Pre-scheduled runs.
 
 ---
 
-# 📂 Estrutura do Projeto
+# 📂 Project Structure
 
 ```text
 consolidation_pipeline/
@@ -337,57 +337,57 @@ consolidation_pipeline/
 
 ---
 
-# 🔗 Integração com GitHub
+# 🔗 GitHub Integration
 
-O projeto utiliza Databricks Repos integrado diretamente ao GitHub.
+The project uses Databricks Repos directly integrated with GitHub.
 
-### Benefícios
+### Benefits
 
-* Controle de versão.
-* Histórico de alterações.
-* Preparação para CI/CD.
+* Version control.
+* Change history.
+* Preparation for CI/CD.
 
 ---
 
-# 📊 Camada Analítica
+# 📊 Analytics Layer
 
-Os dados processados são disponibilizados através de recursos nativos da plataforma.
+Processed data is made available through native Databricks features.
 
 ## Databricks Dashboards
 
-Disponibilização de indicadores como:
+Delivery of indicators such as:
 
-* Receita.
-* Volume de vendas.
-* Performance de produtos.
-* Indicadores de clientes.
+* Revenue.
+* Sales volume.
+* Product performance.
+* Customer indicators.
 
 ## Databricks Genie
 
-Consultas em linguagem natural utilizando IA Generativa.
+Natural language queries using Generative AI.
 
-### Exemplo
+### Example
 
 ```text
-Qual foi a receita total gerada no último trimestre?
+What was the total revenue generated in the last quarter?
 ```
 
-O Genie converte automaticamente a pergunta em SQL e retorna os resultados.
+Genie automatically converts the question into SQL and returns the results.
 
 ---
 
-# 🎯 Competências Demonstradas
+# 🎯 Skills Demonstrated
 
-Este projeto evidencia conhecimentos práticos em:
+This project demonstrates practical knowledge in:
 
 * Databricks Lakehouse Platform
 * Delta Live Tables (DLT)
 * Unity Catalog
 * Medallion Architecture
-* Governança de Dados
+* Data Governance
 * Data Lineage
-* Processamento Incremental
-* Orquestração de Pipelines
+* Incremental Processing
+* Pipeline Orchestration
 * AWS S3
 * PySpark
 * Spark SQL
@@ -396,23 +396,22 @@ Este projeto evidencia conhecimentos práticos em:
 
 ---
 
-# 🚀 Evoluções Futuras
+# 🚀 Future Improvements
 
-* Implementação de testes automatizados de qualidade.
-* GitHub Actions para CI/CD.
-* Data Quality Expectations no DLT.
-* Observabilidade e monitoramento.
-* Controle de SLA dos pipelines.
-* Expansão para múltiplas subsidiárias.
+* Implementation of automated data quality tests.
+* GitHub Actions for CI/CD.
+* Data Quality Expectations in DLT.
+* Observability and monitoring.
+* Pipeline SLA control.
+* Expansion to multiple subsidiaries.
 
 ---
 
-# 👩‍💻 Sobre mim
+# 👩‍💻 About Me
 
-Engenheira de Dados especializada em soluções de dados utilizando Databricks, PySpark, SQL e AWS. Possuo experiência em processamento de grandes volumes de dados, desenvolvimento de pipelines ETL e arquitetura Lakehouse, com foco em governança, automação e escalabilidade.
+Data Engineer specialized in data solutions using Databricks, PySpark, SQL, and AWS. I have experience in large-scale data processing, ETL pipeline development, and Lakehouse architecture, with a focus on governance, automation, and scalability.
 
-
-### Contato
+### Contact
 
 * LinkedIn: https://www.linkedin.com/in/manuella-melo
 * GitHub: https://github.com/ManuMel0
